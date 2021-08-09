@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import SwapiService from "../../services/SwapiService";
 import Spinner from "../spinner";
+import ErrorButton from "../error_button";
 
 import './PersonDetails.css';
 
@@ -53,6 +54,7 @@ export default class PersonDetails extends Component {
             <div className="person-details card">
                 {spinner}
                 {content}
+                <ErrorButton/>
             </div>
         );
     };
