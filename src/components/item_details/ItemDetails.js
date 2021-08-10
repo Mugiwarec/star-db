@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 
-import SwapiService from "../../services/SwapiService";
 import Spinner from "../spinner";
 import ErrorButton from "../error_button";
 
 import './ItemDetails.css';
 
 export default class ItemDetails extends Component {
-
-    swapiService = new SwapiService();
 
     state = {
         item: null,
@@ -71,8 +68,7 @@ const Record = ({item, field, label}) => {
 const ItemView = ({item, image, children}) => {
 
     const {
-        id, name, gender,
-        birthYear, eyeColor
+        name
     } = item;
 
     return (
