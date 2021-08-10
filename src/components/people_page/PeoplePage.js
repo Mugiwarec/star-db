@@ -1,20 +1,19 @@
 import React, {Component} from 'react';
 
 import ItemList from "../item_list";
-import PersonDetails from "../person_details";
-import ErrorIndicator from "../error_indicator";
+import ItemDetails, {Record} from "../item_details";
+import Row from "../row"
+import SwapiService from "../../services/SwapiService";
+import ErrorBoundry from "../error_boundry";
 
 import './PeoplePage.css';
 
-export default class PeoplePage extends React.Component {
+export default class PeoplePage extends Component {
+
+    swapiService = new SwapiService();
 
     state = {
-        selectedPerson: 3,
-        hasError: false
-    };
-
-    componentDidCatch() {
-        this.setState({hasError: true});
+        selectedPerson: 3
     };
 
     onPersonSelected = (selectedPerson) => {
@@ -23,19 +22,34 @@ export default class PeoplePage extends React.Component {
 
     render() {
 
-        if (this.state.hasError) {
-            return <ErrorIndicator/>;
-        }
+        const {getPerson, getPersonImage} = this.swapiService;
+
+        const itemList = (
+            <ItemList
+                onItemSelected={this.onPersonSelected}
+                getData={this.swapiService.getAllPeople}>
+
+                {(i) => (
+                    `${i.name} (${i.gender}, ${i.birthYear})`
+                )}
+
+            </ItemList>
+        );
+
+        const personDetails = (
+            <ItemDetails
+                itemId={this.state.selectedPerson}
+                getData={getPerson}
+                getImageUrl={getPersonImage}>
+
+                <Record field="gender" label="Gender"/>
+                <Record field="eyeColor" label="Eye Color"/>
+
+            </ItemDetails>
+        );
 
         return (
-            <div className="row mb2">
-                <div className="col-md-6">
-                    <ItemList onItemSelected={this.onPersonSelected}/>
-                </div>
-                <div className="col-md-6">
-                    <PersonDetails personId={this.state.selectedPerson}/>
-                </div>
-            </div>
+            <Row left={itemList} right={personDetails}/>
         );
     };
 };
