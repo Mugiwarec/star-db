@@ -1,6 +1,5 @@
 import React from "react";
 import ItemDetails, {Record} from "../item_details";
-import {withData} from "../hoc_helpers";
 import SwapiService from "../../services/SwapiService";
 
 const swapiService = new SwapiService();
@@ -31,8 +30,8 @@ const PlanetDetails = ({itemId}) => {
     return (
         <ItemDetails
             itemId={itemId}
-            getData={getStarship}
-            getImageUrl={getStarshipImage}>
+            getData={getPlanet}
+            getImageUrl={getPlanetImage}>
 
             <Record field="population" label="Population"/>
             <Record field="rotationPeriod" label="Rotation Period"/>
