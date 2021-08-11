@@ -11,7 +11,7 @@ import {
     PersonList,
     PlanetList,
     StarshipList
-} from '../sw-components';
+} from '../sw_components';
 
 import './App.css';
 
